@@ -32,7 +32,7 @@ class FragmentNews : Fragment() {
         val query = "Israel, Krieg, Gaza"
 
         // Übergebe die Instanz von NewsApiService und die zusätzlichen Parameter an die NewsViewModelFactory
-        val factory = NewsViewModelFactory(newsApiService, apiKey, query)
+        val factory = NewsViewModelFactory(newsApiService, apiKey)
 
         viewModel = ViewModelProvider(this, factory).get(NewsViewModel::class.java)
 
@@ -49,7 +49,8 @@ class FragmentNews : Fragment() {
                     Log.i("NewsAdapter", newsResult.code.toString())
                 }
             }
-        })
+        }
+        )
 
         viewModel.fetchNews()
 

@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.core:core-ktx:1.9.0")

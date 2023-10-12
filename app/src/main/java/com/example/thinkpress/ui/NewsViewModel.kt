@@ -14,16 +14,30 @@ import retrofit2.Response
 class NewsViewModel(
     private val newsApiService: NewsApiService,
     private val apiKey: String,
-    private val query: String,
 ) : ViewModel() {
 
     private val _newsResult = MutableLiveData<NewsResult>()
     val newsResult: LiveData<NewsResult> get() = _newsResult
 
+    fun searchNews(query: String) {
+        viewModelScope.launch {
+            try {
+                val response: Response<NewsApiResponse> = newsApiService.getNews(apiKey, query)
+                if (response.isSuccessful) {
+                    _newsResult.postValue(NewsResult.Success(response.body()?.results ?: mutableListOf()))
+                } else {
+                    _newsResult.postValue(NewsResult.Failure(response.code(), response.message()))
+                }
+            } catch (e: Exception) {
+                _newsResult.postValue(NewsResult.Failure(-1, e.localizedMessage ?: "Ein unbekannter Fehler ist aufgetreten."))
+            }
+        }
+    }
+
     fun fetchNews() {
         viewModelScope.launch {
             try {
-                val response: Response<NewsApiResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10", query)
+                val response: Response<NewsApiResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10" ,"Krieg, Gaza,Israel,Bundeswehr")
                 if (response.isSuccessful) {
                     _newsResult.postValue(NewsResult.Success(response.body()?.results ?: mutableListOf()))
 
