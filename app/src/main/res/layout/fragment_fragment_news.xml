@@ -12,16 +12,17 @@
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/newsRV"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          android:clipToPadding="false"
-          android:padding="16dp"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_margin="6dp"
+          android:layoutMode="clipBounds"
+          android:onClick="onFavoriteClick"
+          android:scrollbars="vertical"
           app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          tools:itemCount="3"
+          tools:itemCount="4"
           tools:listitem="@layout/item_news" />
 
 
