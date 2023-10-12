@@ -5,7 +5,7 @@ import com.example.thinkpress.api.NewsApiResponse
 import retrofit2.Response
 
 class NewsRepository(private val newsApiService: NewsApiService) {
-    suspend fun fetchNews(query: String, lang: String): Response<NewsApiResponse> {
-        return newsApiService.getNews(query, lang)
+    suspend fun fetchNews(apiKey:String, query: String): Response<NewsApiResponse> {
+        return newsApiService.getNews(apiKey,query)
     }
 }

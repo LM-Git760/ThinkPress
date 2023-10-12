@@ -19,7 +19,7 @@ class NewsViewModel(private val newsApiService: NewsApiService) : ViewModel() {
     fun fetchNews() {
         viewModelScope.launch {
             try {
-                val response: Response<NewsApiResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10", "Krieg OR gaza")
+                val response: Response<NewsApiResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10", "Krieg")
                 if (response.isSuccessful) {
                     _newsResult.postValue(NewsResult.Success(response.body()?.results ?:emptyList()))
                     Log.i("NewsAdapter", response.body().toString())
