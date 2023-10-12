@@ -40,8 +40,13 @@ class FragmentNews : Fragment() {
         // Erstelle eine Instanz von NewsApiService
         val newsApiService = NewsApiService.create()
 
-        // Übergebe die Instanz von NewsApiService an die NewsViewModelFactory
-        val factory = NewsViewModelFactory(newsApiService)
+        // Hier sind die zusätzlichen Parameter für die NewsViewModelFactory
+        val apiKey = "pub_310178ef71a1b033f97594bf39bee90edfc10"
+        val query = "Krieg"
+
+        // Übergebe die Instanz von NewsApiService und die zusätzlichen Parameter an die NewsViewModelFactory
+        val factory = NewsViewModelFactory(newsApiService, apiKey, query)
+
 
         viewModel = ViewModelProvider(this, factory).get(NewsViewModel::class.java)
 

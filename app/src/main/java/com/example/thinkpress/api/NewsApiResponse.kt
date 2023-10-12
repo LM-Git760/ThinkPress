@@ -1,25 +1,28 @@
 package com.example.thinkpress.api
 
+import com.google.gson.annotations.SerializedName
+
+
 data class NewsApiResponse(
-    val status: String,
-    val totalResults: Int,
-    val results: List<Article>
+    @SerializedName("status") val status: String,
+    @SerializedName("totalResults") val totalResults: Int,
+    @SerializedName("results") val results: List<Article>
 )
 
 data class Article(
-    val article_id: String,
-    val title: String,
-    val link: String,
-    val keywords: List<String>?,
-    val creator: List<String>?,
-    val video_url: String?,
-    val description: String,
-    val content: String,
-    val pubDate: String,
-    val image_url: String?,
-    val source_id: String,
-    val source_priority: Int,
-    val country: List<String>,
-    val category: List<String>,
-    val language: String
+    @SerializedName("article_id") val articleId: String,
+    @SerializedName("title") val title: String,
+    @SerializedName("link") val link: String,
+    @SerializedName("keywords") val keywords: List<String>?,
+    @SerializedName("creator") val creator: List<String>,
+    @SerializedName("video_url") val videoUrl: String?,
+    @SerializedName("description") val description: String,
+    @SerializedName("content") val content: String,
+    @SerializedName("pubDate") val pubDate: String,
+    @SerializedName("image_url") val imageUrl: String,
+    @SerializedName("source_id") val sourceId: String,
+    @SerializedName("source_priority") val sourcePriority: Int,
+    @SerializedName("country") val country: List<String>,
+    @SerializedName("category") val category: List<String>,
+    @SerializedName("language") val language: String
 )

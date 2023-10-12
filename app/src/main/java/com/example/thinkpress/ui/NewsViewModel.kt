@@ -11,7 +11,11 @@ import com.example.thinkpress.api.NewsResult
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class NewsViewModel(private val newsApiService: NewsApiService) : ViewModel() {
+class NewsViewModel(
+    private val newsApiService: NewsApiService,
+    private val apiKey: String,
+    private val query: String,
+) : ViewModel() {
 
     private val _newsResult = MutableLiveData<NewsResult>()
     val newsResult: LiveData<NewsResult> get() = _newsResult
