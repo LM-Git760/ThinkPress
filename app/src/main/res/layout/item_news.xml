@@ -2,21 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:outlineAmbientShadowColor="?android:attr/panelBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintItemNews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="8dp"
+            android:background="#AEACAC"
+            android:backgroundTintMode="src_atop"
+            android:outlineAmbientShadowColor="@color/cardview_light_background"
+            app:cardBackgroundColor="#ED9B9999"
+            app:cardCornerRadius="12dp"
+            app:contentPadding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,34 +35,53 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/article_image_view"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:outlineAmbientShadowColor="@color/cardview_light_background"
+                    app:circularflow_radiusInDP="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/description_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="1"
                     android:text="Artikeltext"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
                 <TextView
                     android:id="@+id/title_text_view"
+                    style="@style/Widget.AppCompat.TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:elevation="2dp"
+                    android:hint="Überschrift"
+                    android:labelFor="@id/description_text_view"
+                    android:maxLines="2"
+                    android:minLines="1"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="3"
                     android:text="Überschrift"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold"
+                    android:typeface="normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/article_image_view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
