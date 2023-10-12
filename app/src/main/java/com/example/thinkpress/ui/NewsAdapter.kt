@@ -67,8 +67,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             if (article.imageUrl != null) {
                 Glide.with(holder.itemView.context)
                     .load(article.imageUrl)
-                    .encodeQuality(90)
-                    .centerCrop()
+                    .fitCenter()
+                    .encodeQuality(85)
                     .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp) // Füge deinen Platzhalter hier ein
                     .into(holder.articleImageView)
             } else {
