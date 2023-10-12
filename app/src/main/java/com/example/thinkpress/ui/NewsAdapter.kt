@@ -14,7 +14,7 @@ import com.example.thinkpress.api.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
-    private var articles: List<Article> = listOf()
+    private var articles: MutableList<Article> = mutableListOf()
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.title_text_view)
@@ -23,8 +23,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         // ... andere UI-Elemente
     }
 
-    fun updateData(newArticles: List<Article>) {
-        articles = newArticles
+    fun updateData(newArticles: MutableList<Article>) {
+        val uniqueArticles = newArticles.distinctBy { it.articleId }
+        this.articles.clear()
+        this.articles.addAll(uniqueArticles)
         notifyDataSetChanged()
     }
 
@@ -40,11 +42,19 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         holder.titleTextView.text = article.title ?:"Kein Titel Verfügbar"
         holder.descriptionTextView.text = article.description ?:"Keine Überschrift Verfügbar"
         // Lade das Bild mit Glide
-        Glide.with(holder.itemView.context)
-            .load(article.imageUrl)
-            .encodeQuality(99)
-            .centerCrop()
-            .into(holder.articleImageView)
+        if(article.imageUrl != null) {
+            Glide.with(holder.itemView.context)
+                .load(article.imageUrl)
+                .encodeQuality(75)
+                .centerCrop()
+                .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp) // Füge deinen Platzhalter hier ein
+                .into(holder.articleImageView)
+        } else {
+            Glide.with(holder.itemView.context)
+                .load(com.google.android.material.R.drawable.abc_star_black_48dp) // Füge deinen Platzhalter hier ein
+                .into(holder.articleImageView)
+        }
+
 
     }
 

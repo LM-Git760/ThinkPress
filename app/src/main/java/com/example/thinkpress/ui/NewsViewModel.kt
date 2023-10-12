@@ -25,7 +25,8 @@ class NewsViewModel(
             try {
                 val response: Response<NewsApiResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10", query)
                 if (response.isSuccessful) {
-                    _newsResult.postValue(NewsResult.Success(response.body()?.results ?:emptyList()))
+                    _newsResult.postValue(NewsResult.Success(response.body()?.results ?: mutableListOf()))
+
                     Log.i("NewsAdapter", response.body().toString())
                 } else {
                     _newsResult.postValue(NewsResult.Failure(response.code(), response.message()))
