@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.thinkpress.R
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
@@ -17,25 +18,11 @@ class FragmentNews : Fragment() {
     private lateinit var viewModel: NewsViewModel
     private var binding: FragmentFragmentNewsBinding? = null
 
-    companion object {
-        fun newInstance() = FragmentNews()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFragmentNewsBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         // Erstelle eine Instanz von NewsApiService
         val newsApiService = NewsApiService.create()
@@ -47,7 +34,6 @@ class FragmentNews : Fragment() {
         // Übergebe die Instanz von NewsApiService und die zusätzlichen Parameter an die NewsViewModelFactory
         val factory = NewsViewModelFactory(newsApiService, apiKey, query)
 
-
         viewModel = ViewModelProvider(this, factory).get(NewsViewModel::class.java)
 
         val adapter = NewsAdapter()
@@ -57,15 +43,21 @@ class FragmentNews : Fragment() {
             when (newsResult) {
                 is NewsResult.Success -> {
                     adapter.updateData(newsResult.articles)
-                    Log.i("NewsAdapter",newsResult.articles.toString() )
+                    Log.i("NewsAdapter", newsResult.articles.toString())
                 }
                 is NewsResult.Failure -> {
                     Log.i("NewsAdapter", newsResult.code.toString())
                 }
             }
-        }
-        )
+        })
 
         viewModel.fetchNews()
+
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
