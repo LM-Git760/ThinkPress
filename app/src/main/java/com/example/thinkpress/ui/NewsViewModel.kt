@@ -21,8 +21,8 @@ class NewsViewModel(private val newsApiService: NewsApiService) : ViewModel() {
             try {
                 val response: Response<NewsApiResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10", "Krieg OR gaza")
                 if (response.isSuccessful) {
-                    _newsResult.postValue(NewsResult.Success(response.body()?.articles ?:emptyList()))
-                    Log.e("Antwort", _newsResult.toString())
+                    _newsResult.postValue(NewsResult.Success(response.body()?.results ?:emptyList()))
+                    Log.i("NewsAdapter", response.body().toString())
                 } else {
                     _newsResult.postValue(NewsResult.Failure(response.code(), response.message()))
                 }

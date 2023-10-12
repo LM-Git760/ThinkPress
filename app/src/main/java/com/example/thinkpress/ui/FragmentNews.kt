@@ -52,10 +52,10 @@ class FragmentNews : Fragment() {
             when (newsResult) {
                 is NewsResult.Success -> {
                     adapter.updateData(newsResult.articles)
-                    Log.e("Antwort",newsResult.articles.toString() )
+                    Log.i("NewsAdapter",newsResult.articles.toString() )
                 }
                 is NewsResult.Failure -> {
-                    // Handle the error here, for example, show a Toast or Snackbar
+                    Log.i("NewsAdapter", newsResult.code.toString())
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.example.thinkpress.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,10 +32,14 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = articles[position]
-        holder.titleTextView.text = article.title
-        holder.descriptionTextView.text = article.description
-        // ... andere UI-Elemente setzen
+        Log.d("NewsAdapter", "Binding article at position $position: $article")
+        holder.titleTextView.text = article.title ?:"Kein Titel Verfügbar"
+        holder.descriptionTextView.text = article.description ?:"Keine Überschrift Verfügbar"
     }
 
-    override fun getItemCount(): Int = articles.size
+    override fun getItemCount(): Int {
+        Log.d("NewsAdapter", "getItemCount called, size: ${articles.size}")
+        return articles.size
+    }
+
 }
