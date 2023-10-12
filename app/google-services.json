@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "348165839509",
+    "project_id": "thinkpress-c77b1",
+    "storage_bucket": "thinkpress-c77b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348165839509:android:8bdf76a33e5ae0c4a8599c",
+        "android_client_info": {
+          "package_name": "com.example.thinkpress"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC3i3wRHFAmFH5cvdhdfbs1jggUr_k_UA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

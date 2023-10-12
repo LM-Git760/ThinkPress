@@ -12,6 +12,7 @@ import com.example.thinkpress.ui.FragmentNews
 import com.example.thinkpress.ui.ProfileFragment
 import com.example.thinkpress.ui.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        FirebaseApp.initializeApp(this)
+
 
         // Set default fragment
         supportFragmentManager.beginTransaction().replace(

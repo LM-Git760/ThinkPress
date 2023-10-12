@@ -27,11 +27,6 @@ class SearchFragment : Fragment() {
     lateinit var viewModel: NewsViewModel
 
 
-
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +34,8 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,6 +58,8 @@ class SearchFragment : Fragment() {
         }
         )
 
+
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -77,6 +76,7 @@ class SearchFragment : Fragment() {
         }
         )
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
