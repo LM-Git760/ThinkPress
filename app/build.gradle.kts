@@ -47,6 +47,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.8.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.fragment:fragment-ktx:1.6.1")

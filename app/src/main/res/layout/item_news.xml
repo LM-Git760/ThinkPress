@@ -1,113 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:outlineAmbientShadowColor="?android:attr/panelBackground">
+    android:backgroundTintMode="src_over"
+    app:cardBackgroundColor="#B7FFD180"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    app:checkedIconTint="#FFE57F"
+    app:contentPadding="8dp"
+    app:strokeColor="#020202"
+    app:strokeWidth="1px">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintItemNews"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="350dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTintMode="src_atop"
-            android:outlineAmbientShadowColor="@color/cardview_light_background"
-            android:background="#55000000"
-            app:cardCornerRadius="12dp"
-            app:contentPadding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/article_image_view"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
+            android:text="Überschrift"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_image_view" />
 
-                <ImageView
-                    android:id="@+id/article_image_view"
-                    android:layout_width="300dp"
-                    android:layout_height="150dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    app:circularflow_radiusInDP="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/description_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:text="Artikeltext"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
-                <TextView
-                    android:id="@+id/description_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:shadowColor="@color/white"
-                    android:shadowRadius="1"
-                    android:text="Artikeltext"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
-
-                <TextView
-                    android:id="@+id/title_text_view"
-                    style="@style/Widget.AppCompat.TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:elevation="6dp"
-                    android:hint="Überschrift"
-                    android:labelFor="@id/description_text_view"
-                    android:maxLines="2"
-                    android:minLines="1"
-                    android:shadowColor="@color/white"
-                    android:shadowRadius="3"
-                    android:text="Überschrift"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:typeface="normal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/article_image_view" />
-
-                <Button
-                    android:id="@+id/favorite_button"
-                    android:layout_width="60dp"
-                    android:layout_height="45dp"
-                    android:background="#00FFFFFF"
-                    android:backgroundTint="#00B92E2E"
-                    android:gravity="center_horizontal"
-                    android:importantForContentCapture="auto"
-                    android:isScrollContainer="false"
-                    android:onClick="onFavoriteClick"
-                    android:textColor="#DDF11212"
-                    android:textColorHighlight="#EF1919"
-                    android:textColorLink="#ED1C1C"
-                    android:visibility="visible"
-                    app:cornerRadius="20dp"
-                    app:icon="@android:drawable/btn_star_big_on"
-                    app:iconSize="35dp"
-                    app:iconTint="#FFB300"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- ... andere UI-Elemente -->
+        <Button
+            android:id="@+id/favorite_button"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#00B92E2E"
+            android:onClick="onFavoriteClick"
+            android:textColor="#DDF11212"
+            app:icon="@android:drawable/btn_star_big_on"
+            app:iconSize="35dp"
+            app:iconTint="#FFB300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
