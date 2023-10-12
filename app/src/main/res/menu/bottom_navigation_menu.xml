@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="Home" />
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/common_full_open_on_phone"
+        android:title="Nachrichten" />
     <item
-        android:id="@+id/nav_search"
-        android:icon="@android:drawable/stat_notify_chat"
-        android:title="Search" />
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/googleg_standard_color_18"
+        android:title="Suche" />
     <item
-        android:id="@+id/nav_profile"
-        android:icon="@android:drawable/ic_menu_recent_history"
-        android:title="Profile" />
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/common_google_signin_btn_text_disabled"
+        android:title="Favoriten" />
 </menu>

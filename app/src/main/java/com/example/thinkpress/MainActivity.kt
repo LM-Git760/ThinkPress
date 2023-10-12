@@ -24,15 +24,15 @@ class MainActivity : AppCompatActivity() {
         var selectedFragment: Fragment? = null
 
         when (item.itemId) {
-            R.id.nav_home -> {
+            R.id.navigation_home -> {
                 // Handle Home navigation
                 selectedFragment = FragmentNews()
             }
-            R.id.nav_search -> {
+            R.id.navigation_dashboard -> {
                 // Handle Search navigation
                 selectedFragment = SearchFragment()
             }
-            R.id.nav_profile -> {
+            R.id.navigation_notifications -> {
                 // Handle Profile navigation
                 selectedFragment = ProfileFragment()
             }
