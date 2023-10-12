@@ -61,21 +61,20 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
                 holder.favoriteButton.text = "☆"
             } else {
                 FavoriteArticlesRepository.addFavorite(article)
-                holder.favoriteButton.text = "★"
+
             }
             // Lade das Bild mit Glide
             if (article.imageUrl != null) {
-                Glide.with(holder.itemView.context)
-                    .load(article.imageUrl)
-                    .fitCenter()
-                    .encodeQuality(85)
-                    .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp) // Füge deinen Platzhalter hier ein
-                    .into(holder.articleImageView)
             } else {
                 Glide.with(holder.itemView.context)
                     .load(com.google.android.material.R.drawable.abc_star_black_48dp) // Füge deinen Platzhalter hier ein
                     .into(holder.articleImageView)
             }
+            Glide.with(holder.itemView.context)
+                .load(article.imageUrl)
+                .encodeQuality(85)
+                .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp)
+                .into(holder.articleImageView)
 
 
         }

@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:backgroundTintMode="src_over"
     app:cardBackgroundColor="#B7FFD180"
     app:cardCornerRadius="12dp"
-    app:cardElevation="8dp"
+    app:cardElevation="12px"
+    app:cardPreventCornerOverlap="true"
     app:checkedIconTint="#FFE57F"
-    app:contentPadding="8dp"
+    app:contentPadding="8px"
     app:strokeColor="#020202"
-    app:strokeWidth="1px">
+    app:strokeWidth="1px"
+    tools:actionBarNavMode="standard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintItemNews"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTintMode="src_in">
 
         <ImageView
             android:id="@+id/article_image_view"
@@ -54,18 +58,31 @@
 
         <Button
             android:id="@+id/favorite_button"
-            android:layout_width="60dp"
-            android:layout_height="45dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="#00B92E2E"
+            android:backgroundTintMode="multiply"
+            android:checkable="true"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:ellipsize="start"
+            android:fontFamily="sans-serif-black"
+            android:insetTop="1dp"
+            android:insetBottom="1dp"
             android:onClick="onFavoriteClick"
-            android:textColor="#DDF11212"
+            android:textAllCaps="false"
+            android:visibility="visible"
             app:icon="@android:drawable/btn_star_big_on"
+            app:iconPadding="1px"
             app:iconSize="35dp"
-            app:iconTint="#FFB300"
+            app:iconTint="#FFA000"
+            app:iconTintMode="multiply"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#DD050000"
+            app:strokeWidth="1px" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
