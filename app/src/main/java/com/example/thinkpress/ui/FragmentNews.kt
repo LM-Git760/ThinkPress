@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
 import com.example.thinkpress.remote.FavoriteArticlesRepository
+import jp.wasabeef.blurry.Blurry
 
 class FragmentNews : Fragment() {
 
@@ -25,6 +27,7 @@ class FragmentNews : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFragmentNewsBinding.inflate(inflater, container, false)
+
 
         // Erstelle eine Instanz von NewsApiService
         val newsApiService = NewsApiService.create()

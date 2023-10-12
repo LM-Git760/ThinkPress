@@ -2,18 +2,18 @@ package com.example.thinkpress
 
 import android.os.Bundle
 import android.text.TextUtils.replace
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.thinkpress.databinding.ActivityMainBinding
-import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
-import com.example.thinkpress.databinding.FragmentSearchBinding
 import com.example.thinkpress.ui.FragmentNews
 import com.example.thinkpress.ui.ProfileFragment
 import com.example.thinkpress.ui.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
+import jp.wasabeef.blurry.Blurry
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
 
+
+
         // Set default fragment
         supportFragmentManager.beginTransaction().replace(
             R.id.fragment_container, FragmentNews()
@@ -65,13 +67,13 @@ class MainActivity : AppCompatActivity() {
 
         // Überprüfe, ob das Fragment bereits hinzugefügt wurde, um zu verhindern,
         // dass es bei Konfigurationsänderungen wie Drehungen erneut hinzugefügt wird
-/*
+
         if (savedInstanceState == null) {
             // Füge das FragmentNews zum FragmentManager hinzu
             supportFragmentManager.commit {
-                replace(R.id.fragment_container, FragmentNews.newInstance())
+                replace(R.id.fragment_container, FragmentNews())
             }
         }
-*/
+
     }
 }
