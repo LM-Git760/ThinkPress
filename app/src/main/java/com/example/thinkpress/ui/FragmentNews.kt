@@ -13,6 +13,7 @@ import com.example.thinkpress.api.Article
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
+import com.example.thinkpress.remote.FavoriteArticlesRepository
 
 class FragmentNews : Fragment() {
 
@@ -39,6 +40,8 @@ class FragmentNews : Fragment() {
 
         val adapter = NewsAdapter()
         binding?.newsRV?.adapter = adapter
+        val favoriteArticles = FavoriteArticlesRepository.getFavorites()
+
 
         viewModel.newsResult.observe(viewLifecycleOwner, Observer { newsResult ->
             when (newsResult) {
@@ -62,4 +65,10 @@ class FragmentNews : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
+    fun onFavoriteClick(view: View) {
+        // Artikel als Favorit markieren oder entfernen
+        // Zum Beispiel mit dem FavoriteArticlesRepository
+    }
+
 }
