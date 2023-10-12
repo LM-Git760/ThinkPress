@@ -1,6 +1,7 @@
 package com.example.thinkpress.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,8 +52,8 @@ class FragmentNews : Fragment() {
             when (newsResult) {
                 is NewsResult.Success -> {
                     adapter.updateData(newsResult.articles)
+                    Log.e("Antwort",newsResult.articles.toString() )
                 }
-
                 is NewsResult.Failure -> {
                     // Handle the error here, for example, show a Toast or Snackbar
                 }

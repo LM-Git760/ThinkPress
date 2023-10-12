@@ -12,7 +12,7 @@ interface NewsApiService {
     suspend fun getNews(
         @Query("apikey") apiKey: String,
         @Query("q") query: String
-    ): Response<NewsResponse>
+    ): Response<NewsApiResponse>
 
     companion object {
         fun create(): NewsApiService {
