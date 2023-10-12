@@ -6,21 +6,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResponse
+import com.example.thinkpress.api.NewsResult
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class NewsViewModel(private val newsApiService: NewsApiService)  : ViewModel() {
+class NewsViewModel(private val newsApiService: NewsApiService) : ViewModel() {
 
-    private val _newsResponse = MutableLiveData<NewsResponse>()
-    val newsResponse: LiveData<NewsResponse> get() = _newsResponse
+    private val _newsResult = MutableLiveData<NewsResult>()
+    val newsResult: LiveData<NewsResult> get() = _newsResult
 
-
-    fun fetchNews(query: String, lang: String) {
+    fun fetchNews() {
         viewModelScope.launch {
             try {
-                val response = newsApiService.getNews(query, lang)
-                _newsResponse.postValue(response)
+                val response: Response<NewsResponse> = newsApiService.getNews("pub_310178ef71a1b033f97594bf39bee90edfc10", "Krieg OR gaza")
+                if (response.isSuccessful) {
+                    _newsResult.postValue(NewsResult.Success(response.body()?.articles ?: emptyList()))
+                } else {
+                    _newsResult.postValue(NewsResult.Failure(response.code(), response.message()))
+                }
             } catch (e: Exception) {
-                // Hier die Antwort verarbeiten
+                _newsResult.postValue(NewsResult.Failure(-1, e.localizedMessage ?: "Ein unbekannter Fehler ist aufgetreten."))
             }
         }
     }

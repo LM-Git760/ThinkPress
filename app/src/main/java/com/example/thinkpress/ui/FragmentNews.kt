@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.thinkpress.api.NewsApiService
+import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
 
-// Definiere die Klasse FragmentNews, die von Fragment erbt
 class FragmentNews : Fragment() {
 
     private lateinit var viewModel: NewsViewModel
@@ -37,7 +37,7 @@ class FragmentNews : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // Erstelle eine Instanz von NewsApiService
-        val newsApiService = NewsApiService.create(requireContext())
+        val newsApiService = NewsApiService.create()
 
         // Übergebe die Instanz von NewsApiService an die NewsViewModelFactory
         val factory = NewsViewModelFactory(newsApiService)
@@ -47,10 +47,19 @@ class FragmentNews : Fragment() {
         val adapter = NewsAdapter()
         binding?.newsRV?.adapter = adapter
 
-        viewModel.newsResponse.observe(viewLifecycleOwner, Observer { newsResponse ->
-            adapter.updateData(newsResponse.articles)
-        })
+        viewModel.newsResult.observe(viewLifecycleOwner, Observer { newsResult ->
+            when (newsResult) {
+                is NewsResult.Success -> {
+                    adapter.updateData(newsResult.articles)
+                }
 
-        viewModel.fetchNews("war", "en")
+                is NewsResult.Failure -> {
+                    // Handle the error here, for example, show a Toast or Snackbar
+                }
+            }
+        }
+        )
+
+        viewModel.fetchNews()
     }
 }

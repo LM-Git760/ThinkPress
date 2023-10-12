@@ -6,9 +6,6 @@ data class NewsResponse(
 
 data class Article(
     val title: String,
-    val description: String,
-    //Andere Felder
+    val description: String
+    // Andere Felder
 )
-
-
-
