@@ -1,26 +1,27 @@
 package com.example.thinkpress.ui
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thinkpress.R
-import com.example.thinkpress.api.Article
+import com.example.thinkpress.api.Favorite
 
-class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-
-    private var favoriteArticles: List<Article> = listOf()
+class FavoriteAdapter : ListAdapter<Favorite, FavoriteAdapter.FavoriteViewHolder>(
+    FavoriteDiffCallback()
+) {
 
     class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleTextView: TextView = itemView.findViewById(R.id.title_text_view)
-        val descriptionTextView: TextView = itemView.findViewById(R.id.description_text_view)
-    }
+        private val titleTextView: TextView = itemView.findViewById(R.id.title_text_view)
+        private val descriptionTextView: TextView = itemView.findViewById(R.id.description_text_view)
 
-    fun submitList(newFavoriteArticles: List<Article>) {
-        favoriteArticles = newFavoriteArticles
-        notifyDataSetChanged()
+        fun bind(favorite: Favorite) {
+            titleTextView.text = favorite.title
+            descriptionTextView.text = favorite.descriptor  // Bemerkung: Hier wurde 'descriptor' statt 'description' verwendet
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -30,10 +31,18 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        val article = favoriteArticles[position]
-        holder.titleTextView.text = article.title
-        holder.descriptionTextView.text = article.description
+        val favorite = getItem(position)
+        holder.bind(favorite)
     }
 
-    override fun getItemCount(): Int = favoriteArticles.size
+    class FavoriteDiffCallback : DiffUtil.ItemCallback<Favorite>() {
+        override fun areItemsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
+            return oldItem.articleId == newItem.articleId
+        }
+
+        override fun areContentsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
+            return oldItem == newItem
+        }
+    }
 }
+

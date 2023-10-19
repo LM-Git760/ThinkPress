@@ -25,4 +25,5 @@ data class Article(
     @SerializedName("country") val country: List<String>,
     @SerializedName("category") val category: List<String>,
     @SerializedName("language") val language: String
-)
+) {
+}

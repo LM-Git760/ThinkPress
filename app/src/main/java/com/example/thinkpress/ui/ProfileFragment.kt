@@ -1,6 +1,7 @@
 package com.example.thinkpress.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thinkpress.R
-import com.example.thinkpress.api.Article
+import com.example.thinkpress.api.Favorite
 import com.google.firebase.database.*
 
 class ProfileFragment : Fragment() {
 
     private lateinit var favoriteArticlesAdapter: FavoriteAdapter
-    private lateinit var favoriteRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        favoriteRecyclerView = view.findViewById(R.id.recycler_fav) // Ersetze 'favoriteRecyclerView' durch die ID deiner RecyclerView in fragment_profile.xml
+        val favoriteRecyclerView: RecyclerView = view.findViewById(R.id.recycler_fav)
         favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
 
         favoriteArticlesAdapter = FavoriteAdapter()
@@ -35,12 +35,13 @@ class ProfileFragment : Fragment() {
         val favoriteArticlesRef = FirebaseDatabase.getInstance().getReference("favoriteArticles")
         favoriteArticlesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val favoriteArticles = snapshot.children.mapNotNull { it.getValue(Article::class.java) }
+                val favoriteArticles = snapshot.children.mapNotNull { it.getValue(Favorite::class.java) }
                 favoriteArticlesAdapter.submitList(favoriteArticles)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
+                Log.e("ProfileFragment", "Database error: ${error.message}")
             }
         })
     }
