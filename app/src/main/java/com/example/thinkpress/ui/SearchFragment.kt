@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentSearchBinding
+import com.example.thinkpress.remote.FavoriteArticlesRepository
 
 // Definition der SearchFragment Klasse, die von Fragment erbt.
 class SearchFragment : Fragment() {
@@ -19,13 +20,19 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     // Verwendung des `viewModels` Delegierten zur Initialisierung von `viewModel`
-    private val viewModel: NewsViewModel by viewModels()
+    private val viewModel: NewsViewModel by viewModels {
+        NewsViewModelFactory(
+            newsApiService = NewsApiService.create(),
+            apiKey = "pub_310178ef71a1b033f97594bf39bee90edfc10",
+            favoriteArticlesRepository = FavoriteArticlesRepository(requireContext())
+        )
+    }
 
     // Definition der onCreateView Methode zur Inflation des Layouts für dieses Fragment.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
