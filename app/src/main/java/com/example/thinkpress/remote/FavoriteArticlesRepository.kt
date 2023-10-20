@@ -1,60 +1,44 @@
 package com.example.thinkpress.remote
 
+import android.content.Context
 import com.example.thinkpress.api.Article
-import com.google.firebase.database.FirebaseDatabase
+import com.example.thinkpress.db.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class FavoriteArticlesRepository {
+// Klasse zur Verwaltung der Datenzugriffsmethoden für favorisierte Artikel.
+class FavoriteArticlesRepository(context: Context) {
 
-    private val database = FirebaseDatabase.getInstance()
-    private val myRef = database.getReference("favoriteArticles")
+    // Singleton-Instanz der AppDatabase.
+    private val db = AppDatabase.getInstance(context)
+    // DAO-Objekt zur Interaktion mit der Datenbank.
+    private val articleDao = db.articleDao()
+    // Koroutinen-Scope zur Verwaltung asynchroner Aufgaben.
+    private val repoScope = CoroutineScope(Dispatchers.IO)
 
-    object FavoriteArticlesRepository {
-        val favoriteArticles = mutableListOf<Article>()
-
-        fun addFavorite(article: Article) {
-            favoriteArticles.add(article)
-        }
-
-        fun removeFavorite(article: Article) {
-            favoriteArticles.remove(article)
-        }
-
-        fun isFavorite(article: Article): Boolean {
-            return favoriteArticles.contains(article)
-        }
-
-        fun getFavorites(): List<Article> {
-            return favoriteArticles
+    // Methode zum Hinzufügen eines Artikels zu den Favoriten.
+    fun addFavorite(article: Article) {
+        // Start einer Koroutine zur Ausführung der asynchronen Operation.
+        repoScope.launch {
+            articleDao.insert(article)
         }
     }
 
-
-
-    fun addFavoriteArticle(articleId: String) {
-        myRef.child(articleId).setValue(true)
+    // Methode zum Entfernen eines Artikels aus den Favoriten.
+    fun removeFavorite(article: Article) {
+        repoScope.launch {
+            articleDao.delete(article)
+        }
     }
 
-
-    fun removeFavoriteArticle(articleId: String) {
-        myRef.child(articleId).removeValue()
+    // Methode zum Überprüfen, ob ein Artikel als Favorit markiert ist.
+    suspend fun isFavorite(id: String): Boolean {
+        return articleDao.isFavorite(id) != null
     }
 
-    // Weitere Methoden zum Abrufen von Favoriten können hier hinzugefügt werden
-    companion object {
-        fun addFavorite(article: Article) {
-            FavoriteArticlesRepository.favoriteArticles.add(article)
-        }
-
-        fun isFavorite(article: Article): Boolean {
-            return FavoriteArticlesRepository.favoriteArticles.contains(article)
-        }
-
-        fun removeFavorite(article: Article) {
-            FavoriteArticlesRepository.favoriteArticles.remove(article)
-        }
-
-        fun getFavorites(): Any {
-            return FavoriteArticlesRepository.favoriteArticles
-        }
+    // Methode zum Abrufen aller favorisierten Artikel.
+    suspend fun getFavorites(): List<Article> {
+        return articleDao.getFavorites()
     }
 }

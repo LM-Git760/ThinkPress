@@ -1,5 +1,7 @@
 package com.example.thinkpress.api
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 
@@ -8,9 +10,9 @@ data class NewsApiResponse(
     @SerializedName("totalResults") val totalResults: Int,
     @SerializedName("results") val results: MutableList<Article>
 )
-
+@Entity
 data class Article(
-    @SerializedName("article_id") val articleId: String,
+    @PrimaryKey @SerializedName("article_id") val articleId: String,
     @SerializedName("title") val title: String,
     @SerializedName("link") val link: String,
     @SerializedName("keywords") val keywords: List<String>?,
@@ -25,5 +27,4 @@ data class Article(
     @SerializedName("country") val country: List<String>,
     @SerializedName("category") val category: List<String>,
     @SerializedName("language") val language: String
-) {
-}
+)

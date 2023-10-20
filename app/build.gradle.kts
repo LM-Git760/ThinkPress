@@ -2,6 +2,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -41,6 +42,16 @@ android {
 }
 
 dependencies {
+    val room_version = "2.6.0"
+
+
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+
+
     implementation("jp.wasabeef:blurry:4.0.0")
     implementation("com.google.firebase:firebase-database:20.2.2")
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -48,7 +59,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.8.1")
-    implementation("androidx.room:room-common:2.5.2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.fragment:fragment-ktx:1.6.1")

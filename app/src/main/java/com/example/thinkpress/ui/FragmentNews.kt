@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.thinkpress.R
-import com.example.thinkpress.api.Article
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
@@ -28,23 +26,29 @@ class FragmentNews : Fragment() {
     ): View? {
         binding = FragmentFragmentNewsBinding.inflate(inflater, container, false)
 
-
         // Erstelle eine Instanz von NewsApiService
         val newsApiService = NewsApiService.create()
 
+        // Erstelle eine Instanz von FavoriteArticlesRepository
+        val favoriteArticlesRepository = context?.let { FavoriteArticlesRepository(it) }
+
+        // Überprüfe, ob die Kontext und favoriteArticlesRepository Instanzen nicht null sind
+        if (favoriteArticlesRepository == null) {
+            Log.e("FragmentNews", "Kontext oder FavoriteArticlesRepository ist null")
+            return binding?.root
+        }
+
         // Hier sind die zusätzlichen Parameter für die NewsViewModelFactory
         val apiKey = "pub_310178ef71a1b033f97594bf39bee90edfc10"
-        val query = "Israel, Krieg, Gaza"
 
-        // Übergebe die Instanz von NewsApiService und die zusätzlichen Parameter an die NewsViewModelFactory
-        val factory = NewsViewModelFactory(newsApiService, apiKey)
+        // Übergebe die Instanz von NewsApiService und favoriteArticlesRepository und die zusätzlichen Parameter an die NewsViewModelFactory
+        val factory = NewsViewModelFactory(newsApiService, favoriteArticlesRepository, apiKey)
 
         viewModel = ViewModelProvider(this, factory).get(NewsViewModel::class.java)
 
-        val adapter = NewsAdapter()
+        // Übergebe das viewModel an den NewsAdapter
+        val adapter = NewsAdapter(viewModel)
         binding?.newsRV?.adapter = adapter
-        val favoriteArticles = FavoriteArticlesRepository.getFavorites()
-
 
         viewModel.newsResult.observe(viewLifecycleOwner, Observer { newsResult ->
             when (newsResult) {
@@ -56,8 +60,7 @@ class FragmentNews : Fragment() {
                     Log.i("NewsAdapter", newsResult.code.toString())
                 }
             }
-        }
-        )
+        })
 
         viewModel.fetchNews()
 

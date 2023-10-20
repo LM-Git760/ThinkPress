@@ -6,27 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentSearchBinding
 
+// Definition der SearchFragment Klasse, die von Fragment erbt.
 class SearchFragment : Fragment() {
 
+    // Verwendung von View Binding für eine sicherere und effizientere Handhabung von Views.
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    // Erstelle eine Instanz von NewsApiService
-    val newsApiService = NewsApiService.create()
-    val apiKey = "pub_310178ef71a1b033f97594bf39bee90edfc10"
 
-    // Übergebe die Instanz von NewsApiService und die zusätzlichen Parameter an die NewsViewModelFactory
-    val factory = NewsViewModelFactory(newsApiService, apiKey)
-   // private val viewModel = ViewModelProvider(this, factory).get(NewsViewModel::class.java)
+    // Verwendung des `viewModels` Delegierten zur Initialisierung von `viewModel`
+    private val viewModel: NewsViewModel by viewModels()
 
-    lateinit var viewModel: NewsViewModel
-
-
+    // Definition der onCreateView Methode zur Inflation des Layouts für dieses Fragment.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,49 +30,45 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-
-
+    // Definition der onViewCreated Methode, die aufgerufen wird, nachdem die Ansicht erstellt wurde.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = NewsAdapter()
+        // Erstellung des NewsAdapter und Zuweisung zum RecyclerView.
+        val adapter = NewsAdapter(viewModel)
         binding.recyclerView.adapter = adapter
-        // Übergebe die Instanz von NewsApiService und die zusätzlichen Parameter an die NewsViewModelFactory
-        val factory = NewsViewModelFactory(newsApiService, apiKey)
-        viewModel = ViewModelProvider(this, factory).get(NewsViewModel::class.java)
 
-        viewModel.newsResult.observe(viewLifecycleOwner, Observer { newsResult ->
+        // Beobachtung der newsResult LiveData und Aktualisierung des Adapters bei Änderungen.
+        viewModel.newsResult.observe(viewLifecycleOwner, { newsResult ->
             when (newsResult) {
                 is NewsResult.Success -> {
-                    adapter.updateData(newsResult.articles)  // updateData ist eine Methode in deinem Adapter
+                    adapter.updateData(newsResult.articles)
                 }
                 is NewsResult.Failure -> {
-                    // Handle failure
+                    // Fehlerbehandlung
                 }
             }
         }
         )
 
-
-
+        // Definition des OnQueryTextListener für die SearchView.
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    // Handle search query submission
                     viewModel.searchNews(it)
                 }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Optional: Handle search query text change
+                // Optional: Behandlung von Änderungen des Abfragetexts
                 return true
             }
         }
         )
     }
 
-
+    // Definition der onDestroyView Methode zur Aufhebung der Bindung.
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

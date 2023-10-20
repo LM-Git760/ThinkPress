@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
-import com.example.thinkpress.remote.FavoriteArticlesRepository
+import kotlinx.coroutines.launch
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     private var articles: MutableList<Article> = mutableListOf()
 
@@ -47,37 +48,31 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         Log.d("NewsAdapter", "Binding article at position $position: $article")
         holder.titleTextView.text = article.title ?: "Kein Titel Verfügbar"
         holder.descriptionTextView.text = article.description ?: "Keine Überschrift Verfügbar"
-        // Favoritenstatus überprüfen
-        if (FavoriteArticlesRepository.FavoriteArticlesRepository.isFavorite(article)) {
-            holder.favoriteButton.text = "★"
-        } else {
-            holder.favoriteButton.text = "☆"
+
+        // Setze den Favoriten-Button-Text basierend auf dem Favoritenstatus
+        viewModel.viewModelScope.launch {
+            val isFavorite = viewModel.isFavorite(article.articleId)
+            holder.favoriteButton.text = if (isFavorite) "★" else "☆"
         }
 
         holder.favoriteButton.setOnClickListener {
-            if (FavoriteArticlesRepository.isFavorite(article)) {
-                FavoriteArticlesRepository.removeFavorite(article)
-                holder.favoriteButton.text = "☆"
-            } else {
-                FavoriteArticlesRepository.addFavorite(article)
-
+            viewModel.viewModelScope.launch {
+                val isFavorite = viewModel.isFavorite(article.articleId)
+                if (isFavorite) {
+                    viewModel.removeFavorite(article)
+                    holder.favoriteButton.text = "☆"
+                } else {
+                    viewModel.addFavorite(article)
+                    holder.favoriteButton.text = "★"
+                }
             }
-            // Lade das Bild mit Glide
-            if (article.imageUrl != null) {
-            } else {
-                Glide.with(holder.itemView.context)
-                    .load(com.google.android.material.R.drawable.abc_star_black_48dp) // Füge deinen Platzhalter hier ein
-                    .into(holder.articleImageView)
-            }
-            Glide.with(holder.itemView.context)
-                .load(article.imageUrl)
-                .encodeQuality(85)
-                .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp)
-                .into(holder.articleImageView)
-
-
         }
 
-
+        // Lade das Bild mit Glide
+        Glide.with(holder.itemView.context)
+            .load(article.imageUrl ?: com.google.android.material.R.drawable.abc_star_black_48dp)  // Verwendet den Platzhalter, wenn imageUrl null ist
+            .encodeQuality(85)
+            .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp)
+            .into(holder.articleImageView)
     }
 }
