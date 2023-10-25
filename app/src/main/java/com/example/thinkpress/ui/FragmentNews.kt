@@ -16,10 +16,6 @@ import com.example.thinkpress.remote.FavoriteArticlesRepository
 class FragmentNews : Fragment() {
     var onArticleClickListener: OnArticleClickListener? = null
 
-    interface OnArticleClickListener {
-        fun onArticleClick(article: Article)
-    }
-
 
     private lateinit var viewModel: NewsViewModel
     private var binding: FragmentFragmentNewsBinding? = null

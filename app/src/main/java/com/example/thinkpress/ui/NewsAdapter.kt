@@ -10,14 +10,18 @@ import android.widget.TextView
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.annotation.GlideExtension
-import com.bumptech.glide.annotation.GlideModule
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
 import kotlinx.coroutines.launch
 
+
+
+interface OnArticleClickListener {
+    fun onArticleClick(article: Article)
+}
+
 class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
-    var onArticleClickListener: FragmentNews.OnArticleClickListener? = null
+     var onArticleClickListener: OnArticleClickListener? = null
 
     private var articles: MutableList<Article> = mutableListOf()
 
@@ -60,14 +64,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<N
 
         holder.itemView.setOnClickListener {
             viewModel.viewModelScope.launch {
-                val isFavorite = viewModel.isFavorite(article.articleId)
-                if (isFavorite) {
-                    viewModel.removeFavorite(article)
-                    holder.favoriteButton.text = "☆"
-                } else {
-                    viewModel.addFavorite(article)
-                    holder.favoriteButton.text = "★"
-                }
+                onArticleClickListener?.onArticleClick(article)
             }
         }
 
