@@ -38,7 +38,7 @@ class FavoriteArticlesRepository(context: Context) {
     }
 
     // Methode zum Abrufen aller favorisierten Artikel.
-    suspend fun getFavorites(): List<Article> {
+   suspend fun getFavorites(): List<Article> {
         return articleDao.getFavorites()
     }
 }

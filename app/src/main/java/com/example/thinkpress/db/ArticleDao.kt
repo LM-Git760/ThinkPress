@@ -1,14 +1,14 @@
 package com.example.thinkpress.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Delete
 import com.example.thinkpress.api.Article
 
 // Definition des DAO (Data Access Object) zur Interaktion mit der Datenbank.
 @Dao
-interface ArticleDao {
+sealed interface ArticleDao {
 
     // Methode zum Einfügen eines Artikels in die Datenbank.
     @Insert
@@ -24,5 +24,5 @@ interface ArticleDao {
 
     // Methode zum Abrufen aller favorisierten Artikel aus der Datenbank.
     @Query("SELECT * FROM article")
-    suspend fun getFavorites(): List<Article>
+     fun getFavorites(): List<Article>
 }

@@ -6,16 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.thinkpress.R
+import com.example.thinkpress.api.Article
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
 import com.example.thinkpress.remote.FavoriteArticlesRepository
-import jp.wasabeef.blurry.Blurry
 
 class FragmentNews : Fragment() {
+    var onArticleClickListener: OnArticleClickListener? = null
+
+    interface OnArticleClickListener {
+        fun onArticleClick(article: Article)
+    }
+
 
     private lateinit var viewModel: NewsViewModel
     private var binding: FragmentFragmentNewsBinding? = null
@@ -50,17 +54,19 @@ class FragmentNews : Fragment() {
         val adapter = NewsAdapter(viewModel)
         binding?.newsRV?.adapter = adapter
 
-        viewModel.newsResult.observe(viewLifecycleOwner, Observer { newsResult ->
+        viewModel.newsResult.observe(viewLifecycleOwner
+        ) { newsResult ->
             when (newsResult) {
                 is NewsResult.Success -> {
                     adapter.updateData(newsResult.articles)
                     Log.i("NewsAdapter", newsResult.articles.toString())
                 }
+
                 is NewsResult.Failure -> {
                     Log.i("NewsAdapter", newsResult.code.toString())
                 }
             }
-        })
+        }
 
         viewModel.fetchNews()
 
@@ -72,9 +78,7 @@ class FragmentNews : Fragment() {
         binding = null
     }
 
-    fun onFavoriteClick(view: View) {
-        // Artikel als Favorit markieren oder entfernen
-        // Zum Beispiel mit dem FavoriteArticlesRepository
-    }
+
+
 
 }

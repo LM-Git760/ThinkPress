@@ -16,7 +16,7 @@ import retrofit2.Response
 
 // Definition der NewsViewModel Klasse, die von ViewModel erbt.
 class NewsViewModel(
-    private val newsApiService: NewsApiService,
+    newsApiService: NewsApiService,
     private val favoriteArticlesRepository: FavoriteArticlesRepository,
     private val apiKey: String,
 ) : ViewModel() {

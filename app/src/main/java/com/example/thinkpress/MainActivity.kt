@@ -1,8 +1,6 @@
 package com.example.thinkpress
 
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -13,7 +11,6 @@ import com.example.thinkpress.ui.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
-import jp.wasabeef.blurry.Blurry
 
 
 class MainActivity : AppCompatActivity() {

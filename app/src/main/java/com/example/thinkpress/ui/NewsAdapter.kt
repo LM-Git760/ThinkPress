@@ -10,11 +10,14 @@ import android.widget.TextView
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideExtension
+import com.bumptech.glide.annotation.GlideModule
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
 import kotlinx.coroutines.launch
 
 class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+    var onArticleClickListener: FragmentNews.OnArticleClickListener? = null
 
     private var articles: MutableList<Article> = mutableListOf()
 
@@ -46,8 +49,8 @@ class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<N
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = articles[position]
         Log.d("NewsAdapter", "Binding article at position $position: $article")
-        holder.titleTextView.text = article.title ?: "Kein Titel Verfügbar"
-        holder.descriptionTextView.text = article.description ?: "Keine Überschrift Verfügbar"
+        holder.titleTextView.text = article.title
+        holder.descriptionTextView.text = article.description
 
         // Setze den Favoriten-Button-Text basierend auf dem Favoritenstatus
         viewModel.viewModelScope.launch {
@@ -55,7 +58,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<N
             holder.favoriteButton.text = if (isFavorite) "★" else "☆"
         }
 
-        holder.favoriteButton.setOnClickListener {
+        holder.itemView.setOnClickListener {
             viewModel.viewModelScope.launch {
                 val isFavorite = viewModel.isFavorite(article.articleId)
                 if (isFavorite) {
@@ -70,7 +73,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) : RecyclerView.Adapter<N
 
         // Lade das Bild mit Glide
         Glide.with(holder.itemView.context)
-            .load(article.imageUrl ?: com.google.android.material.R.drawable.abc_star_black_48dp)  // Verwendet den Platzhalter, wenn imageUrl null ist
+            .load(article.imageUrl)  // Verwendet den Platzhalter, wenn imageUrl null ist
             .encodeQuality(85)
             .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp)
             .into(holder.articleImageView)

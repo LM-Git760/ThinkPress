@@ -7,12 +7,12 @@
     android:backgroundTintMode="src_over"
     app:cardBackgroundColor="#B7FFD180"
     app:cardCornerRadius="12dp"
-    app:cardElevation="12px"
+    app:cardElevation="12dp"
     app:cardPreventCornerOverlap="true"
     app:checkedIconTint="#FFE57F"
-    app:contentPadding="8px"
+    app:contentPadding="8dp"
     app:strokeColor="#020202"
-    app:strokeWidth="1px"
+    app:strokeWidth="1dp"
     tools:actionBarNavMode="standard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,8 @@
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/bild" />
 
         <TextView
             android:id="@+id/title_text_view"
@@ -63,26 +64,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:allowClickWhenDisabled="false"
             android:backgroundTintMode="multiply"
             android:checkable="true"
-            android:clickable="true"
+            android:clickable="false"
             android:elevation="2dp"
             android:ellipsize="start"
             android:fontFamily="sans-serif-black"
             android:insetTop="1dp"
             android:insetBottom="1dp"
-            android:onClick="onFavoriteClick"
             android:textAllCaps="false"
             android:visibility="visible"
             app:icon="@android:drawable/btn_star_big_on"
             app:iconPadding="1px"
             app:iconSize="35dp"
             app:iconTint="#FFA000"
-            app:iconTintMode="multiply"
+            app:iconTintMode="src_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="#DD050000"
-            app:strokeWidth="1px" />
+            app:strokeWidth="1px"
+            app:toggleCheckedStateOnClick="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

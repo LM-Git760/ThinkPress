@@ -14,7 +14,7 @@ import com.google.firebase.database.*
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var favoriteArticlesAdapter: FavoriteAdapter
+   // private lateinit var favoriteArticlesAdapter: FavoriteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,20 +29,23 @@ class ProfileFragment : Fragment() {
         val favoriteRecyclerView: RecyclerView = view.findViewById(R.id.recycler_fav)
         favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        favoriteArticlesAdapter = FavoriteAdapter()
-        favoriteRecyclerView.adapter = favoriteArticlesAdapter
+        //favoriteArticlesAdapter = FavoriteAdapter()
+       // favoriteRecyclerView.adapter = favoriteArticlesAdapter
 
         val favoriteArticlesRef = FirebaseDatabase.getInstance().getReference("favoriteArticles")
         favoriteArticlesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val favoriteArticles = snapshot.children.mapNotNull { it.getValue(Favorite::class.java) }
-                favoriteArticlesAdapter.submitList(favoriteArticles)
+            //    favoriteArticlesAdapter.submitList(favoriteArticles)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
                 Log.e("ProfileFragment", "Database error: ${error.message}")
             }
-        })
+
+
+        }
+        )
     }
 }
