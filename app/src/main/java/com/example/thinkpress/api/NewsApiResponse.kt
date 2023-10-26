@@ -12,7 +12,8 @@ data class NewsApiResponse(
 )
 @Entity
 data class Article(
-    @PrimaryKey @SerializedName("article_id") val articleId: String,
+    @PrimaryKey
+    @SerializedName("article_id") val articleId: String,
     @SerializedName("title") val title: String,
     @SerializedName("link") val link: String,
     @SerializedName("keywords") val keywords: List<String>?,
@@ -26,5 +27,13 @@ data class Article(
     @SerializedName("source_priority") val sourcePriority: Int,
     @SerializedName("country") val country: List<String>,
     @SerializedName("category") val category: List<String>,
-    @SerializedName("language") val language: String
+    @SerializedName("language") val language: String,
+    //Changelog
+    @SerializedName("prioritydomain") val priorityDomain: String?,
+    @SerializedName("timeframe") val timeframe: String?,
+    @SerializedName("excludedomain") val excludeDomain: String?,
+    @SerializedName("timezone") val timezone: String?,
+    @SerializedName("full_content") val fullContent: Boolean?,
+    @SerializedName("image") val image: Boolean?,
+    @SerializedName("video") val video: Boolean?
 )

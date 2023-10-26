@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="bild">Bild</string>
+    <string name="favoriten">Favoriten</string>
+    <string name="suche">Suche</string>
 </resources>

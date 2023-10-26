@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Favorite
+import com.example.thinkpress.api.NewsApiService
+import com.example.thinkpress.remote.FavoriteArticlesRepository
 import com.google.firebase.database.*
 
 class ProfileFragment : Fragment() {
@@ -29,8 +31,7 @@ class ProfileFragment : Fragment() {
         val favoriteRecyclerView: RecyclerView = view.findViewById(R.id.recycler_fav)
         favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        //favoriteArticlesAdapter = FavoriteAdapter()
-       // favoriteRecyclerView.adapter = favoriteArticlesAdapter
+        //favoriteRecyclerView.adapter =
 
         val favoriteArticlesRef = FirebaseDatabase.getInstance().getReference("favoriteArticles")
         favoriteArticlesRef.addValueEventListener(object : ValueEventListener {

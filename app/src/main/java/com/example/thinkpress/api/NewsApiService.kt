@@ -12,6 +12,7 @@ interface NewsApiService {
     suspend fun getNews(
         @Query("apikey") apiKey: String,
         @Query("q") query: String,
+
     ): Response<NewsApiResponse>
 
     companion object {
@@ -19,6 +20,7 @@ interface NewsApiService {
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://newsdata.io/")
                 .addConverterFactory(GsonConverterFactory.create())
+
                 .build()
 
             return retrofit.create(NewsApiService::class.java)

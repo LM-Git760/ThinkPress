@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/common_full_open_on_phone"
-        android:title="Nachrichten" />
+        android:icon="@drawable/baseline_home_24"
+        android:iconTint="#898989"
+        android:iconTintMode="src_atop"
+        android:title="@string/nachrichten"
+        app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/googleg_standard_color_18"
-        android:title="Suche" />
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/suche" />
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/common_google_signin_btn_text_disabled"
-        android:title="Favoriten" />
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:title="@string/favoriten" />
 </menu>

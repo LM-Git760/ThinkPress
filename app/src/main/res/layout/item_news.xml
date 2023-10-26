@@ -3,44 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTintMode="src_over"
-    app:cardBackgroundColor="#B7FFD180"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="12dp"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@color/light_grey"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
     app:cardPreventCornerOverlap="true"
-    app:checkedIconTint="#FFE57F"
-    app:contentPadding="8dp"
-    app:strokeColor="#020202"
-    app:strokeWidth="1dp"
-    tools:actionBarNavMode="standard">
+    tools:actionBarNavMode="tabs">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintItemNews"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTintMode="src_in">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/article_image_view"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/bild"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/bild" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/title_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:maxLines="2"
             android:text="Überschrift"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/article_image_view" />
@@ -50,41 +41,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:padding="8dp"
             android:text="Artikeltext"
-            android:textSize="14sp"
+            android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
         <Button
             android:id="@+id/favorite_button"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@android:style/Widget.Material.Light.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:allowClickWhenDisabled="false"
-            android:backgroundTintMode="multiply"
-            android:checkable="true"
-            android:clickable="false"
-            android:elevation="2dp"
-            android:ellipsize="start"
-            android:fontFamily="sans-serif-black"
-            android:insetTop="1dp"
-            android:insetBottom="1dp"
+            android:background="@drawable/glass_button_background"
+            android:clickable="true"
+            android:drawableLeft="@android:drawable/ic_input_get"
             android:textAllCaps="false"
-            android:visibility="visible"
-            app:icon="@android:drawable/btn_star_big_on"
-            app:iconPadding="1px"
-            app:iconSize="35dp"
-            app:iconTint="#FFA000"
-            app:iconTintMode="src_in"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="#DD050000"
-            app:strokeWidth="1px"
-            app:toggleCheckedStateOnClick="true" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

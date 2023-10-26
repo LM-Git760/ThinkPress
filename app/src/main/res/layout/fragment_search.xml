@@ -20,6 +20,5 @@
         tools:listitem="@layout/item_news"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <!-- Hier können weitere UI-Elemente hinzugefügt werden, z.B. eine RecyclerView für die Suchergebnisse -->
 
 </LinearLayout>
