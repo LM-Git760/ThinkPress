@@ -8,11 +8,12 @@ import com.example.thinkpress.api.Article
 
 // Definition des DAO (Data Access Object) zur Interaktion mit der Datenbank.
 @Dao
-sealed interface ArticleDao {
+interface ArticleDao {
 
     // Methode zum Einfügen eines Artikels in die Datenbank.
     @Insert
     suspend fun insert(article: Article)
+
 
     // Methode zum Löschen eines Artikels aus der Datenbank.
     @Delete
@@ -25,4 +26,8 @@ sealed interface ArticleDao {
     // Methode zum Abrufen aller favorisierten Artikel aus der Datenbank.
     @Query("SELECT * FROM article")
      fun getFavorites(): List<Article>
+
+    @Query("DELETE FROM article WHERE articleId = :id")
+    suspend fun deleteById(id: String)
+
 }

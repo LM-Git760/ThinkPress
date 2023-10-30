@@ -1,5 +1,6 @@
 package com.example.thinkpress.ui
 
+// ProfileFragment.kt
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,19 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Favorite
-import com.example.thinkpress.api.NewsApiService
-import com.example.thinkpress.remote.FavoriteArticlesRepository
 import com.google.firebase.database.*
 
 class ProfileFragment : Fragment() {
 
-   // private lateinit var favoriteArticlesAdapter: FavoriteAdapter
+    private lateinit var favoriteArticlesAdapter: FavoriteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,21 +31,19 @@ class ProfileFragment : Fragment() {
         val favoriteRecyclerView: RecyclerView = view.findViewById(R.id.recycler_fav)
         favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        //favoriteRecyclerView.adapter =
+        favoriteArticlesAdapter = FavoriteAdapter()
+        favoriteRecyclerView.adapter = favoriteArticlesAdapter
 
         val favoriteArticlesRef = FirebaseDatabase.getInstance().getReference("favoriteArticles")
         favoriteArticlesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val favoriteArticles = snapshot.children.mapNotNull { it.getValue(Favorite::class.java) }
-            //    favoriteArticlesAdapter.submitList(favoriteArticles)
+                favoriteArticlesAdapter.submitList(favoriteArticles)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
                 Log.e("ProfileFragment", "Database error: ${error.message}")
             }
-
-
         }
         )
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentSearchBinding
@@ -42,7 +43,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Erstellung des NewsAdapter und Zuweisung zum RecyclerView.
-        val adapter = NewsAdapter(viewModel)
+        val adapter = NewsAdapter(viewModel, viewModel.viewModelScope)
         binding.recyclerView.adapter = adapter
 
         // Beobachtung der newsResult LiveData und Aktualisierung des Adapters bei Änderungen.
