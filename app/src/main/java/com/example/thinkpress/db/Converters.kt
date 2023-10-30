@@ -2,28 +2,28 @@ package com.example.thinkpress.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 
 class Converters {
 
-    // Methode zur Konvertierung einer Liste von Strings in einen JSON-String.
+    private val gson = Gson()
+
     @TypeConverter
     fun fromListToString(list: List<String>?): String {
-        return if (list == null) {
-            ""
-        } else {
-            Gson().toJson(list)
-        }
+        return list?.let { gson.toJson(it) } ?: ""
     }
 
-    // Methode zur Konvertierung eines JSON-Strings zurück in eine Liste von Strings.
     @TypeConverter
-    fun fromStringToList(string: String?): List<String> {
-        return if (string.isNullOrEmpty()) {
+    fun fromStringToList(value: String?): List<String> {
+        if (value.isNullOrEmpty()) {
+            return emptyList()
+        }
+        val listType = object : TypeToken<List<String>>() {}.type
+        return try {
+            gson.fromJson(value, listType) ?: emptyList()
+        } catch (e: JsonSyntaxException) {
             emptyList()
-        } else {
-            val type = object : TypeToken<List<String>>() {}.type
-            Gson().fromJson(string, type)
         }
     }
 }

@@ -62,7 +62,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.0")
-    ksp("com.github.bumptech.glide:compiler:5.0.0-rc01")
+    annotationProcessor("com.github.bumptech.glide:compiler:5.0.0-rc01")
     implementation("androidx.core:core-ktx:1.13.0-alpha01")
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

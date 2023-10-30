@@ -8,10 +8,10 @@ import androidx.room.TypeConverters
 import com.example.thinkpress.api.Article
 
 // Annotation zur Definition der Datenbank mit den entsprechenden Entitäten und der Version.
-@Database(entities = [Article::class], version = 1)
+@Database(entities = [Article::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
-
 abstract class AppDatabase : RoomDatabase() {
+
     // Methode zur Bereitstellung des DAO-Objekts
     abstract fun articleDao(): ArticleDao
 
@@ -19,13 +19,6 @@ abstract class AppDatabase : RoomDatabase() {
         // Volatile sorgt für die sofortige Sichtbarkeit der Änderungen an INSTANCE für alle Threads.
         @Volatile
         private var INSTANCE: AppDatabase? = null
-
-
-        fun close() {
-            INSTANCE?.close()
-            INSTANCE = null
-        }
-
 
         // Methode zur Bereitstellung der Singleton-Datenbankinstanz.
         fun getInstance(context: Context): AppDatabase {
@@ -35,7 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "favorite-articles",
+                    "favorite_articles"
                 )
                     .fallbackToDestructiveMigration()
                     .build()
