@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,18 +12,19 @@ import com.bumptech.glide.Glide
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewsAdapter(
     private val viewModel: NewsViewModel,
     private val coroutineScope: CoroutineScope // Übergeben Sie den CoroutineScope aus dem Fragment
 ) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
-    var onArticleClickListener: OnArticleClickListener? = null
     private var articles: MutableList<Article> = mutableListOf()
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val favoriteButton: Button = itemView.findViewById(R.id.favorite_button)
+        val favoriteButton: CheckBox = itemView.findViewById(R.id.favorite_button)
         val titleTextView: TextView = itemView.findViewById(R.id.title_text_view)
         val descriptionTextView: TextView = itemView.findViewById(R.id.description_text_view)
         val articleImageView: ImageView = itemView.findViewById(R.id.article_image_view)
@@ -47,6 +49,14 @@ class NewsAdapter(
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = articles[position]
+        holder.favoriteButton.setOnCheckedChangeListener(null)
+        CoroutineScope(Dispatchers.IO).launch {
+            val isFavorite = viewModel.isFavorite(article)
+            withContext(Dispatchers.Main) {
+                holder.favoriteButton.isChecked = isFavorite
+            }
+        }
+
 
         holder.titleTextView.text = article.title
         holder.descriptionTextView.text = article.description
@@ -66,10 +76,6 @@ class NewsAdapter(
                     holder.favoriteButton.text = "Favorisiert"
                 }
             }
-        }
-
-        holder.itemView.setOnClickListener {
-            onArticleClickListener?.onArticleClick(article)
         }
 
         Glide.with(holder.itemView.context)
