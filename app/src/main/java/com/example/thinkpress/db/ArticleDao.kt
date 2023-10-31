@@ -7,7 +7,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.thinkpress.api.Article
-import com.example.thinkpress.api.Favorite
 
 // Definition des DAO (Data Access Object) zur Interaktion mit der Datenbank.
 @Dao
@@ -15,7 +14,7 @@ interface ArticleDao {
 
     // Methode zum Einfügen eines Artikels in die Datenbank.
     // OnConflictStrategy.REPLACE sorgt dafür, dass bei Konflikten der existierende Eintrag ersetzt wird.
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(article: Article)
 
     // Methode zum Löschen eines Artikels aus der Datenbank.
@@ -32,6 +31,9 @@ interface ArticleDao {
 
     // Methode zum Abrufen aller favorisierten Artikel aus der Datenbank.
     @Query("SELECT * FROM article WHERE isFavorite = 1")
-    fun getFavoriteArticles(): LiveData<List<Favorite>>
+    fun getFavoriteArticles(): LiveData<List<Article>>
+
+    @Query("SELECT * FROM article")
+    fun getAllArticles(): LiveData<List<Article>>
 
 }

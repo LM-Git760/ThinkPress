@@ -39,5 +39,5 @@ data class Article(
     @SerializedName("full_content") val fullContent: Boolean?,
     @SerializedName("image") val image: Boolean?,
     @SerializedName("video") val video: Boolean?,
-    val isFavorite: Boolean = false
+    val isFavorite: Int?
 )

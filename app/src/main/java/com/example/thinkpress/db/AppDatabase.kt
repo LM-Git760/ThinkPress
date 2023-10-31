@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.thinkpress.api.Article
 
 // Annotation zur Definition der Datenbank mit den entsprechenden Entitäten und der Version.
-@Database(entities = [Article::class], version = 3, exportSchema = false)
+@Database(entities = [Article::class], version = 4)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

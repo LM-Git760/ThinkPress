@@ -3,17 +3,16 @@ package com.example.thinkpress.remote
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.thinkpress.api.Article
-import com.example.thinkpress.api.Favorite
 import com.example.thinkpress.db.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 // Klasse zur Verwaltung der Datenzugriffsmethoden für favorisierte Artikel.
-class FavoriteArticlesRepository(context: Context) {
+class FavoriteArticlesRepository(appContext: Context) {
 
     // Singleton-Instanz der AppDatabase.
-    private val db = AppDatabase.getInstance(context)
+    private val db = AppDatabase.getInstance(appContext)
     // DAO-Objekt zur Interaktion mit der Datenbank.
     private val articleDao = db.articleDao()
     // Koroutinen-Scope zur Verwaltung asynchroner Aufgaben.
@@ -26,8 +25,9 @@ class FavoriteArticlesRepository(context: Context) {
             articleDao.insert(article)
         }
     }
-    fun getFavoriteArticles(): LiveData<List<Favorite>> {
-        return articleDao.getFavoriteArticles()
+
+    fun getFavoriteArticles(): LiveData<List<Article>> {
+        return articleDao.getAllArticles() // Ändere dies zu getFavoriteArticles(), wenn eine solche Methode im DAO existiert.
     }
 
     // Methode zum Entfernen eines Artikels aus den Favoriten.
@@ -41,5 +41,4 @@ class FavoriteArticlesRepository(context: Context) {
     suspend fun isFavorite(id: String): Boolean {
         return articleDao.isFavorite(id) != null
     }
-
 }

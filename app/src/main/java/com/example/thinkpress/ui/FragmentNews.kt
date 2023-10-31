@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 class FragmentNews : Fragment() {
 
     private lateinit var viewModel: NewsViewModel
-    private var binding: FragmentFragmentNewsBinding? = null
+    private lateinit var binding: FragmentFragmentNewsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +35,7 @@ class FragmentNews : Fragment() {
 
         if (favoriteArticlesRepository == null) {
             Log.e("FragmentNews", "Kontext oder FavoriteArticlesRepository ist null")
-            return binding?.root
+            return binding.root
         }
 
         val apiKey = "pub_310178ef71a1b033f97594bf39bee90edfc10"
@@ -45,7 +45,7 @@ class FragmentNews : Fragment() {
 
 
         val adapter = NewsAdapter(viewModel, viewModel.viewModelScope)
-        binding?.newsRV?.adapter = adapter
+        binding.newsRV.adapter = adapter
 
         // Observer für die LiveData im ViewModel
         viewModel.newsResult.observe(viewLifecycleOwner) { newsResult ->
@@ -78,13 +78,13 @@ class FragmentNews : Fragment() {
 
 
 
-    return binding?.root
+    return binding.root
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        return
     }
 }
 

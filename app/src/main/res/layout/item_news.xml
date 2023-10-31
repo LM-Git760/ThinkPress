@@ -11,7 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintItemNews"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="20dp">
 
         <ImageView
             android:id="@+id/article_image_view"
