@@ -27,10 +27,8 @@ class ArticleDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val article = arguments?.getSerializable("article") as? Article
-        if (article == null) {
-            // Log an error or show a toast to the user
+            ?: // Log an error or show a toast to the user
             return
-        }
 
         binding.titleTextView.text = article.pubDate
         binding.authorTextView.text = article.title
@@ -46,4 +44,5 @@ class ArticleDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

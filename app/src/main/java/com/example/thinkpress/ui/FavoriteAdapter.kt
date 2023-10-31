@@ -1,11 +1,13 @@
 package com.example.thinkpress.ui
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
@@ -51,6 +53,19 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
             holder.contentTextView.text = article.content
         } else {
             holder.contentTextView.text = ""  // Setzen Sie den Text auf leer, wenn kein Inhalt vorhanden ist
+        }
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article", article.articleId)
+            }
+            val fragment = ArticleDetailFragment().apply {
+                arguments = bundle
+            }
+            (it.context as AppCompatActivity).supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         Picasso.get().load(article.imageUrl).into(holder.articleImageView)
