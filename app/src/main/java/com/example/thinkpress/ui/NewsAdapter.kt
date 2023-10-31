@@ -32,8 +32,10 @@ class NewsAdapter(
 
     fun updateData(newArticles: MutableList<Article>) {
         val uniqueArticles = newArticles.distinctBy { it.articleId }
+        val articlesWithImages = uniqueArticles.filter { it.imageUrl != null  }
+
         this.articles.clear()
-        this.articles.addAll(uniqueArticles)
+        this.articles.addAll(articlesWithImages)
         notifyDataSetChanged()
     }
 

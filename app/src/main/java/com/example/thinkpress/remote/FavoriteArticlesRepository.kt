@@ -18,6 +18,7 @@ class FavoriteArticlesRepository(appContext: Context) {
     // Koroutinen-Scope zur Verwaltung asynchroner Aufgaben.
     private val repoScope = CoroutineScope(Dispatchers.IO)
 
+
     // Methode zum Hinzufügen eines Artikels zu den Favoriten.
     fun addFavorite(article: Article) {
         // Start einer Koroutine zur Ausführung der asynchronen Operation.

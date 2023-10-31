@@ -33,7 +33,7 @@ class ProfileFragment : Fragment() {
             Log.e("ProfileFragment", "FavoriteArticlesRepository is null")
         }
 
-        favoriteArticlesAdapter = FavoriteAdapter()
+        favoriteArticlesAdapter = FavoriteAdapter(favoriteArticlesRepository!!)
         binding.recyclerView.apply {
             adapter = favoriteArticlesAdapter
             layoutManager = LinearLayoutManager(context)
