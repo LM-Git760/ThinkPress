@@ -1,50 +1,55 @@
 package com.example.thinkpress.ui
 
-// ProfileFragment.kt
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.thinkpress.R
 import com.example.thinkpress.api.Favorite
-import com.google.firebase.database.*
+import com.example.thinkpress.databinding.FragmentProfileBinding
+import com.example.thinkpress.remote.FavoriteArticlesRepository
 
 class ProfileFragment : Fragment() {
-
+    private lateinit var viewModel: ProfileViewModel
     private lateinit var favoriteArticlesAdapter: FavoriteAdapter
+    private var binding: FragmentProfileBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val favoriteRecyclerView: RecyclerView = view.findViewById(R.id.recycler_fav)
-        favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
+        val favoriteArticlesRepository = context?.let { FavoriteArticlesRepository(it) }
+        if (favoriteArticlesRepository != null) {
+            viewModel = ViewModelProvider(this,
+                ProfileViewModel.ProfileViewModelFactory(favoriteArticlesRepository)
+            )[ProfileViewModel::class.java]
+        } else {
+            // Handle error, z.B. Log oder Toast
+        }
 
         favoriteArticlesAdapter = FavoriteAdapter()
-        favoriteRecyclerView.adapter = favoriteArticlesAdapter
+        binding?.recyclerFav?.adapter = favoriteArticlesAdapter
+        binding?.recyclerFav?.layoutManager = LinearLayoutManager(context)
 
-        val favoriteArticlesRef = FirebaseDatabase.getInstance().getReference("favoriteArticles")
-        favoriteArticlesRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val favoriteArticles = snapshot.children.mapNotNull { it.getValue(Favorite::class.java) }
-                favoriteArticlesAdapter.submitList(favoriteArticles)
+        // Beobachte die LiveData aus dem ViewModel
+        if (::viewModel.isInitialized) {
+            viewModel.favoriteArticles.observe(viewLifecycleOwner) { articles ->
+                // Aktualisiere den Adapter
+                favoriteArticlesAdapter.submitList(newList = articles)
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("ProfileFragment", "Database error: ${error.message}")
-            }
+        } else {
+            // Handle error, z.B. Log oder Toast
         }
-        )
+
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

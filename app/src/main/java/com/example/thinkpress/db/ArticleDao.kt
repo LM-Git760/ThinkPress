@@ -1,12 +1,13 @@
 package com.example.thinkpress.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.thinkpress.api.Article
-import com.google.common.net.HttpHeaders.FROM
+import com.example.thinkpress.api.Favorite
 
 // Definition des DAO (Data Access Object) zur Interaktion mit der Datenbank.
 @Dao
@@ -30,6 +31,7 @@ interface ArticleDao {
     suspend fun isFavorite(id: String): Article?
 
     // Methode zum Abrufen aller favorisierten Artikel aus der Datenbank.
-    @Query("SELECT * FROM article WHERE image = :image")
-    suspend fun getFavorites(image:Boolean): List<Article>
+    @Query("SELECT * FROM article WHERE isFavorite = 1")
+    fun getFavoriteArticles(): LiveData<List<Favorite>>
+
 }

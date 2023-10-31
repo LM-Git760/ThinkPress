@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thinkpress.R
+import com.example.thinkpress.api.Article
 import com.example.thinkpress.api.Favorite
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+    var articleList: List<Article> = listOf()
+
 
     private var favoriteList: List<Favorite> = listOf()
 

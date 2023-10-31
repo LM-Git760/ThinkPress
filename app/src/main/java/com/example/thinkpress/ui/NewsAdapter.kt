@@ -61,10 +61,7 @@ class NewsAdapter(
         holder.titleTextView.text = article.title
         holder.descriptionTextView.text = article.description
 
-        coroutineScope.launch {
-            val isFavorite = viewModel.isFavorite(article)
-            holder.favoriteButton.text = if (isFavorite) "Favorisiert" else "Favorisieren"
-        }
+
 
         holder.favoriteButton.setOnClickListener {
             coroutineScope.launch {

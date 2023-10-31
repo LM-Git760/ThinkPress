@@ -1,7 +1,9 @@
 package com.example.thinkpress.remote
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.thinkpress.api.Article
+import com.example.thinkpress.api.Favorite
 import com.example.thinkpress.db.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,9 @@ class FavoriteArticlesRepository(context: Context) {
         repoScope.launch {
             articleDao.insert(article)
         }
+    }
+    fun getFavoriteArticles(): LiveData<List<Favorite>> {
+        return articleDao.getFavoriteArticles()
     }
 
     // Methode zum Entfernen eines Artikels aus den Favoriten.

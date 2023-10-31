@@ -6,5 +6,6 @@ import androidx.room.Entity
 data class Favorite(
     val articleId: String?,
     val title: String?,
-    val descriptor: String?
+    val descriptor: String?,
+    val isFavorite: Boolean?,
 )
