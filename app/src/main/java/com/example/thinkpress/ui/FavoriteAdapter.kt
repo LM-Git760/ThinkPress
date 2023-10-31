@@ -22,7 +22,8 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         val descriptionTextView: TextView = itemView.findViewById(R.id.description_text_view)
         val articleImageView: ImageView = itemView.findViewById(R.id.article_image_view)
         val favoriteCheckBox: CheckBox = itemView.findViewById(R.id.favorite_button)
-        val dateTextView : TextView = itemView.findViewById(R.id.pub_date_text_view)
+        val dateTextView: TextView = itemView.findViewById(R.id.pub_date_text_view)
+        val contentTextView: TextView = itemView.findViewById(R.id.content_text_view)  // Stellen Sie sicher, dass diese ID im XML-Layout existiert
     }
 
     fun submitList(newList: List<Article>) {
@@ -45,6 +46,13 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         holder.titleTextView.text = article.title
         holder.descriptionTextView.text = article.description
         holder.dateTextView.text = article.pubDate
+
+        if (article.content != null && !article.content.isEmpty()) {
+            holder.contentTextView.text = article.content
+        } else {
+            holder.contentTextView.text = ""  // Setzen Sie den Text auf leer, wenn kein Inhalt vorhanden ist
+        }
+
         Picasso.get().load(article.imageUrl).into(holder.articleImageView)
 
         holder.favoriteCheckBox.setOnCheckedChangeListener(null)  // Verhindert, dass alte Listener aufgerufen werden

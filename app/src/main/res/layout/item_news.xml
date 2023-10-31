@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/light_grey"
+    app:cardBackgroundColor="#90CAF9"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp"
     app:cardPreventCornerOverlap="true">
@@ -32,6 +32,7 @@
             android:layout_marginTop="8dp"
             android:text="Überschrift"
             android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/bottom_nav_text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/article_image_view" />
@@ -43,19 +44,21 @@
             android:layout_marginTop="8dp"
             android:text="Artikeltext"
             android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@color/bottom_nav_text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
         <CheckBox
             android:id="@+id/favorite_button"
+            style="@style/Widget.Material3.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/glass_button_background"
-            android:clickable="true"
 
+            android:clickable="true"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
