@@ -25,7 +25,7 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         val articleImageView: ImageView = itemView.findViewById(R.id.article_image_view)
         val favoriteCheckBox: CheckBox = itemView.findViewById(R.id.favorite_button)
         val dateTextView: TextView = itemView.findViewById(R.id.pub_date_text_view)
-        val contentTextView: TextView = itemView.findViewById(R.id.content_text_view)  // Stellen Sie sicher, dass diese ID im XML-Layout existiert
+        val contentTextView: TextView = itemView.findViewById(R.id.content_text_view)
     }
 
     fun submitList(newList: List<Article>) {
@@ -49,29 +49,30 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         holder.descriptionTextView.text = article.description
         holder.dateTextView.text = article.pubDate
 
-        if (article.content != null && !article.content.isEmpty()) {
+        if (article.content != null && article.content.isNotEmpty()) {
             holder.contentTextView.text = article.content
         } else {
-            holder.contentTextView.text = ""  // Setzen Sie den Text auf leer, wenn kein Inhalt vorhanden ist
+            holder.contentTextView.text = ""
         }
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable("article", article.articleId)
+                putSerializable("article", article)
+
             }
             val fragment = ArticleDetailFragment().apply {
                 arguments = bundle
             }
-            (it.context as AppCompatActivity).supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
+            (it.context as? AppCompatActivity)?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.fragment_container, fragment)
+                ?.addToBackStack(null)
+                ?.commit()
         }
 
         Picasso.get().load(article.imageUrl).into(holder.articleImageView)
 
-        holder.favoriteCheckBox.setOnCheckedChangeListener(null)  // Verhindert, dass alte Listener aufgerufen werden
-        holder.favoriteCheckBox.isChecked = true  // Alle Artikel in dieser Liste sind Favoriten
+        holder.favoriteCheckBox.setOnCheckedChangeListener(null)
+        holder.favoriteCheckBox.isChecked = true
 
         holder.favoriteCheckBox.setOnCheckedChangeListener { _, isChecked ->
             if (!isChecked) {

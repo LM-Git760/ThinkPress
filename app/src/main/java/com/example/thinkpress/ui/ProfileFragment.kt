@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.thinkpress.R
+import com.example.thinkpress.api.Article
 import com.example.thinkpress.databinding.FragmentProfileBinding
 import com.example.thinkpress.remote.FavoriteArticlesRepository
 
@@ -21,6 +23,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
 
         val favoriteArticlesRepository = context?.let { FavoriteArticlesRepository(it) }
         if (favoriteArticlesRepository!= null) {
@@ -45,6 +48,19 @@ class ProfileFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun onArticleClicked(article: Article) {
+        val bundle = Bundle().apply {
+            putSerializable("article", this.getSerializable(article.toString()))
+        }
+        val fragment = ArticleDetailFragment().apply {
+            arguments = bundle
+        }
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {

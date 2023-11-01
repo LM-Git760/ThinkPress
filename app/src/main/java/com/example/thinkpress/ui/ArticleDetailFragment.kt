@@ -1,6 +1,7 @@
 package com.example.thinkpress.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,31 +19,27 @@ class ArticleDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArticleDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val article = arguments?.getSerializable("article") as? Article
-            ?: // Log an error or show a toast to the user
-            return
-
-        binding.titleTextView.text = article.pubDate
-        binding.authorTextView.text = article.title
-        binding.descriptionTextView.text = article.description
-        binding.contentTextView.text = article.content
-
-        Glide.with(this)
-            .load(article.imageUrl)
-            .into(binding.articleImageView)
+        if (article != null) {
+            binding.titleTextView.text = article.title
+            binding.authorTextView.text = article.creator?.toString() ?: "Unknown Author"
+            binding.descriptionTextView.text = article.description
+            binding.contentTextView.text = article.content
+            Glide.with(this).load(article.imageUrl).into(binding.articleImageView)
+        } else {
+            Log.e("ArticleDetailFragment", "Article object is null")
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

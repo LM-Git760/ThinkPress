@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.thinkpress.db.Converters
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class NewsApiResponse(
@@ -40,4 +41,4 @@ data class Article(
     @SerializedName("image") val image: Boolean?,
     @SerializedName("video") val video: Boolean?,
     val isFavorite: Int?
-)
+) : Serializable

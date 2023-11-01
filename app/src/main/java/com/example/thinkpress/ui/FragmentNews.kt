@@ -27,7 +27,7 @@ class FragmentNews : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFragmentNewsBinding.inflate(inflater, container, false)
 
         val newsApiService = NewsApiService.create()
