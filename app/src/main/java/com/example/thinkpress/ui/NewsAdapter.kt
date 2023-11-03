@@ -3,14 +3,13 @@ package com.example.thinkpress.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.thinkpress.R
 import com.example.thinkpress.api.Article
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -77,10 +76,7 @@ class NewsAdapter(
             }
         }
 
-        Glide.with(holder.itemView.context)
-            .load(article.imageUrl)
-            .encodeQuality(85)
-            .placeholder(com.google.android.material.R.drawable.abc_star_black_48dp)
-            .into(holder.articleImageView)
+        Picasso.get().load(article.imageUrl).into(holder.articleImageView)
+
     }
 }

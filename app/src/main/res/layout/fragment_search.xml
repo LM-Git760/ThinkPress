@@ -8,17 +8,17 @@
     tools:context=".ui.SearchFragment">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Nachrichten suchen..."/>
+        android:queryHint="Nachrichten suchen..." />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_news"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_news" />
 
 
 </LinearLayout>

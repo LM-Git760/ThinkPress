@@ -8,6 +8,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.RecyclerView
+import com.example.thinkpress.R
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentSearchBinding
@@ -44,23 +46,24 @@ class SearchFragment : Fragment() {
 
         // Erstellung des NewsAdapter und Zuweisung zum RecyclerView.
         val adapter = NewsAdapter(viewModel, viewModel.viewModelScope)
-        binding.recyclerView.adapter = adapter
+        binding.root.findViewById<RecyclerView>(R.id.recyclerView).adapter = adapter
 
         // Beobachtung der newsResult LiveData und Aktualisierung des Adapters bei Änderungen.
-        viewModel.newsResult.observe(viewLifecycleOwner, { newsResult ->
+        viewModel.newsResult.observe(viewLifecycleOwner
+        ) { newsResult ->
             when (newsResult) {
                 is NewsResult.Success -> {
                     adapter.updateData(newsResult.articles)
                 }
+
                 is NewsResult.Failure -> {
                     // Fehlerbehandlung
                 }
             }
         }
-        )
 
         // Definition des OnQueryTextListener für die SearchView.
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.root.findViewById<SearchView>(R.id.searchView).setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     viewModel.searchNews(it)

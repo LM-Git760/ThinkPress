@@ -50,19 +50,6 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    fun onArticleClicked(article: Article) {
-        val bundle = Bundle().apply {
-            putSerializable("article", this.getSerializable(article.toString()))
-        }
-        val fragment = ArticleDetailFragment().apply {
-            arguments = bundle
-        }
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d("ProfileFragment", "onDestroyView called")

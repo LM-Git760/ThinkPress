@@ -13,10 +13,7 @@ import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
 import com.example.thinkpress.databinding.FragmentFragmentNewsBinding
 import com.example.thinkpress.remote.FavoriteArticlesRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FragmentNews : Fragment() {
 

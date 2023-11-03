@@ -1,5 +1,3 @@
-import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
-
 plugins {
     id("org.jetbrains.kotlin.android")
     id("com.android.application")
@@ -56,13 +54,13 @@ dependencies {
 
     implementation("jp.wasabeef:blurry:4.0.1")
     implementation("com.google.firebase:firebase-database:20.3.0")
-    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.5.0")
     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.9.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
     annotationProcessor("com.github.bumptech.glide:compiler:5.0.0-rc01")
     implementation("androidx.core:core-ktx:1.13.0-alpha01")
     implementation("androidx.fragment:fragment-ktx:1.6.1")

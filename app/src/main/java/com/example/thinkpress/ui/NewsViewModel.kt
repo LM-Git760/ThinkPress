@@ -50,11 +50,11 @@ class NewsViewModel(
                 if (response.isSuccessful) {
                     _newsResult.postValue(NewsResult.Success(response.body()?.results ?: mutableListOf()))
                 } else {
-                    _newsResult.postValue(NewsResult.Failure(response.code(), response.message()))
+                    _newsResult.postValue(NewsResult.Failure(response.code()))
                 }
             } catch (e: Exception) {
                 Log.e("NewsViewModel", e.localizedMessage ?: "Ein unbekannter Fehler ist aufgetreten.")
-                _newsResult.postValue(NewsResult.Failure(-1, e.localizedMessage ?: "Ein unbekannter Fehler ist aufgetreten."))
+                _newsResult.postValue(NewsResult.Failure(-1))
             }
         }
     }
@@ -68,11 +68,11 @@ class NewsViewModel(
                     _newsResult.postValue(NewsResult.Success(response.body()?.results ?: mutableListOf()))
                     Log.i("NewsViewModel", response.body().toString())
                 } else {
-                    _newsResult.postValue(NewsResult.Failure(response.code(), response.message()))
+                    _newsResult.postValue(NewsResult.Failure(response.code()))
                 }
             } catch (e: Exception) {
                 Log.e("NewsViewModel", e.localizedMessage ?: "Ein unbekannter Fehler ist aufgetreten.")
-                _newsResult.postValue(NewsResult.Failure(-1, e.localizedMessage ?: "Ein unbekannter Fehler ist aufgetreten."))
+                _newsResult.postValue(NewsResult.Failure(-1))
             }
         }
     }
