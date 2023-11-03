@@ -10,8 +10,9 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Base.Theme.ThinkPress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/article_image_view"
@@ -91,6 +92,7 @@
             android:textColorLink="#2B94EA"
             android:textSize="22sp"
             android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pub_date_text_view" />
