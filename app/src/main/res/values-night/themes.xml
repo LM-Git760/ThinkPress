@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.ThinkPress" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.ThinkPress" parent="Theme.Material3.DayNight">
         <!-- Customize your dark theme here. -->
-        <item name="colorPrimary">@color/design_default_color_primary_variant</item>
+        <item name="colorPrimary">@color/bottom_nav_background</item>
     </style>
 </resources>
