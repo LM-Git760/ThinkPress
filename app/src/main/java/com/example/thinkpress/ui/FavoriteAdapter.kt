@@ -49,7 +49,7 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         holder.descriptionTextView.text = article.description
         holder.dateTextView.text = article.pubDate
 
-        if (article.content != null && article.content.isNotEmpty()) {
+        if (!article.content.isNullOrEmpty()) {
             holder.contentTextView.text = article.content
         } else {
             holder.contentTextView.text = ""

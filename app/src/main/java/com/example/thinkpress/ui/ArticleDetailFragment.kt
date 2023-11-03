@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.example.thinkpress.api.Article
 import com.example.thinkpress.databinding.FragmentArticleDetailBinding
 
@@ -32,7 +31,6 @@ class ArticleDetailFragment : Fragment() {
             binding.authorTextView.text = article.creator?.toString() ?: "Unknown Author"
             binding.descriptionTextView.text = article.description
             binding.contentTextView.text = article.content
-            Glide.with(this).load(article.imageUrl).into(binding.articleImageView)
         } else {
             Log.e("ArticleDetailFragment", "Article object is null")
         }

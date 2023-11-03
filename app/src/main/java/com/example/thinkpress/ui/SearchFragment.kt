@@ -46,7 +46,7 @@ class SearchFragment : Fragment() {
 
         // Erstellung des NewsAdapter und Zuweisung zum RecyclerView.
         val adapter = NewsAdapter(viewModel, viewModel.viewModelScope)
-        binding.root.findViewById<RecyclerView>(R.id.recyclerView).adapter = adapter
+        binding.root.findViewById<RecyclerView>(R.id.RecyclerView).adapter = adapter
 
         // Beobachtung der newsResult LiveData und Aktualisierung des Adapters bei Änderungen.
         viewModel.newsResult.observe(viewLifecycleOwner
