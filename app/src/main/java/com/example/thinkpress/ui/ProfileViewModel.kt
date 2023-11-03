@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.thinkpress.api.Article
-import com.example.thinkpress.api.Favorite
 import com.example.thinkpress.remote.FavoriteArticlesRepository
 
 class ProfileViewModel(favoriteArticlesRepository: FavoriteArticlesRepository) : ViewModel() {

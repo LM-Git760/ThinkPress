@@ -6,8 +6,8 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bottom_nav_background">#B7FFD180</color>
-    <color name="bottom_nav_icon_color">#FFB300</color>
+    <color name="bottom_nav_background">#3C477F</color>
+    <color name="bottom_nav_icon_color">@color/white</color>
     <color name="bottom_nav_text_color">#020202</color>
 
 </resources>

@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.thinkpress.api.Article
-import com.example.thinkpress.api.Favorite
 import com.example.thinkpress.api.NewsApiResponse
 import com.example.thinkpress.api.NewsApiService
 import com.example.thinkpress.api.NewsResult
