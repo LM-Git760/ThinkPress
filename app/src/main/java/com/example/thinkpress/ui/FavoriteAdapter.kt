@@ -25,7 +25,7 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         val articleImageView: ImageView = itemView.findViewById(R.id.article_image_view)
         val favoriteCheckBox: CheckBox = itemView.findViewById(R.id.favorite_button)
         val dateTextView: TextView = itemView.findViewById(R.id.pub_date_text_view)
-        val contentTextView: TextView = itemView.findViewById(R.id.content_text_view)
+    // val contentTextView: TextView = itemView.findViewById(R.id.content_text_view)
     }
 
     fun submitList(newList: List<Article>) {
@@ -49,11 +49,11 @@ class FavoriteAdapter(private val repository: FavoriteArticlesRepository) :
         holder.descriptionTextView.text = article.description
         holder.dateTextView.text = article.pubDate
 
-        if (!article.content.isNullOrEmpty()) {
+   /*     if (!article.content.isNullOrEmpty()) {
             holder.contentTextView.text = article.content
         } else {
             holder.contentTextView.text = ""
-        }
+        }*/
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", article)

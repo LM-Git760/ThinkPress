@@ -17,45 +17,44 @@
         <ImageView
             android:id="@+id/article_image_view"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:contentDescription="Artikel Bild"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/favorite_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColorHighlight="@color/card_background"
-            app:checkedState="unchecked"
+            app:checkedState="indeterminate"
             app:layout_constraintEnd_toEndOf="@+id/article_image_view"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:text="Title"
             android:textAlignment="viewStart"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/primary_text_light_nodisable"
             android:textColorLink="#2B94EA"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/article_image_view" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/description_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="2dp"
             android:text="Description"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@android:color/primary_text_light_nodisable"
@@ -65,12 +64,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/pub_date_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="-3dp"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="Pub Date"
             android:textAppearance="?attr/textAppearanceCaption"
             android:textColor="@android:color/primary_text_light_nodisable"
@@ -80,22 +79,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
 
-        <TextView
-            android:id="@+id/content_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:padding="15dp"
-            android:text="Artikel Inhalt"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/primary_text_light_nodisable"
-            android:textColorLink="#2B94EA"
-            android:textSize="22sp"
-            android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pub_date_text_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

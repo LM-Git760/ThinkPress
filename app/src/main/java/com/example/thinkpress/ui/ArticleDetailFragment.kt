@@ -1,13 +1,13 @@
 package com.example.thinkpress.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.thinkpress.api.Article
 import com.example.thinkpress.databinding.FragmentArticleDetailBinding
+import com.squareup.picasso.Picasso
 
 class ArticleDetailFragment : Fragment() {
 
@@ -20,20 +20,17 @@ class ArticleDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentArticleDetailBinding.inflate(inflater, container, false)
-        return binding.root
+        return _binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val article = arguments?.getSerializable("article") as? Article
-        if (article != null) {
-            binding.titleTextView.text = article.title
-            binding.authorTextView.text = article.creator?.toString() ?: "Unknown Author"
-            binding.descriptionTextView.text = article.description
-            binding.contentTextView.text = article.content
-        } else {
-            Log.e("ArticleDetailFragment", "Article object is null")
-        }
+        val article = arguments!!.getSerializable("article") as Article
+        binding.titleTextView.text = article.title
+        binding.pubDateTextView.text = article.pubDate
+        binding.descriptionTextView.text = article.description
+        binding.contentTextView.text = article.content
+        Picasso.get().load(article.imageUrl).into(binding.articleImageView)
     }
 
     override fun onDestroyView() {
