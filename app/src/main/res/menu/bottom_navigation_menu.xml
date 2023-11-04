@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/baseline_home_24"
-        android:menuCategory="container"
-        android:title="@string/nachrichten"
-        app:showAsAction="never" />
+        android:title="@string/nachrichten" />
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@android:drawable/ic_menu_search"
-        android:menuCategory="container"
         android:title="@string/suche" />
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@android:drawable/ic_popup_reminder"
-        android:menuCategory="container"
         android:title="@string/favoriten" />
 </menu>

@@ -5,5 +5,8 @@
    <item name="colorPrimary">@color/bottom_nav_background</item>
     </style>
 
-    <style name="Theme.ThinkPress" parent="Base.Theme.ThinkPress" />
+    <style name="Theme.ThinkPress" parent="Theme.Material3.DynamicColors.DayNight" >
+    <item name="colorPrimary">@color/bottom_nav_background</item>
+    </style>
+
 </resources>

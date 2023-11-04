@@ -25,7 +25,7 @@ class ArticleDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val article = arguments!!.getSerializable("article") as Article
+        val article = requireArguments().getSerializable("article") as Article
         binding.titleTextView.text = article.title
         binding.pubDateTextView.text = article.pubDate
         binding.descriptionTextView.text = article.description
