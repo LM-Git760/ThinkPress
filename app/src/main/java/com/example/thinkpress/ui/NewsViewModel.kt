@@ -63,7 +63,7 @@ class NewsViewModel(
     fun fetchNews() {
         viewModelScope.launch {
             try {
-                val response: Response<NewsApiResponse> = newsRepository.fetchNews(apiKey, "Politik")
+                val response: Response<NewsApiResponse> = newsRepository.fetchNews(apiKey, "heute")
                 if (response.isSuccessful) {
                     _newsResult.postValue(NewsResult.Success(response.body()?.results ?: mutableListOf()))
                     Log.i("NewsViewModel", response.body().toString())
