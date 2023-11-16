@@ -10,7 +10,6 @@ ThinkPress ist eine moderne Nachrichten-App, die Nutzern aktuelle Nachrichten un
 - **Artikelsuche:** Durchsuchen Sie Artikel nach Schlüsselwörtern oder Themen.
 - **Favoriten:** Speichern Sie Artikel, die Sie interessant finden, um sie später erneut zu lesen.
 - **Detailansichten:** Lesen Sie Artikel in einer vollständigen Detailansicht mit Bildern und Inhalten.
-- **Responsives Design:** Optimiert für eine Vielzahl von Geräten und Bildschirmgrößen.
 
 ## Technologien
 
@@ -39,10 +38,6 @@ Um die App zu installieren, folgen Sie diesen Schritten:
 ## Mitwirken
 
 Wir freuen uns über Beiträge von der Community. Wenn Sie zur App beitragen möchten, erstellen Sie bitte einen Pull-Request mit Ihren vorgeschlagenen Änderungen.
-
-## Lizenz
-
-Diese App ist unter der MIT-Lizenz veröffentlicht. Weitere Details finden Sie in der [LIZENZ](LICENSE.md) Datei.
 
 ## Kontakt
 
